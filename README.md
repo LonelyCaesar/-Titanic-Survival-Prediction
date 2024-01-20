@@ -12,6 +12,30 @@
 訓練集有 891 筆資料、12 個特徵欄位； 測試集有 418 筆資料、11 個特徵欄位； 其中，訓練集較測試集多了判別乘客罹難或生還的特徵欄位 Survived，0 表示罹難者，1 表示生還者。
 ### 程式碼：
 ```python
+# 忽略警告訊息
+import warnings
+warnings.filterwarnings("ignore")
+
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt
+plt.style.use('fivethirtyeight')
+import seaborn as sns 
+from sklearn.model_selection import StratifiedKFold, train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn import preprocessing, linear_model
+
+# 載入數據
+df_train = pd.read_csv('train.csv')
+df_test = pd.read_csv('test.csv')
+submit = pd.read_csv('gender_submission.csv')
+
+print('train',df_train.shape)
+display(df_train.head(5))
+print('test',df_test.shape)
+display(df_test.head(5))
+```
+```python
 # 合併train及test的資料 
 df_data = df_train.append( df_test )
 df_data
