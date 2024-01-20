@@ -47,3 +47,54 @@ df_data
 ### 2.	生存率：
 首先，我們分析生還者與罹難者的比例是否有明顯極大的落差，比如生還者的比例僅有 1%，若資料有極大的落差時，表示存在『數據不平衡』(Imbalanced Data)的問題，則後續需用特別的方法對資料進行抽樣。 接下來，我們分別觀察性別(Sex)、票務艙(Pclass)、登船港口(Embarked)、兄弟姊妹配偶人數(SibSp)、父母子女人數(Parch)與生存率的關係。
 ### 程式碼：
+```python
+sns.countplot(df_data['Sex'], hue=df_data['Survived'])
+df_data[["Sex", "Survived"]].groupby(['Sex'], as_index=False).mean().round(2)
+```
+### 執行結果：
+![image](https://github.com/LonelyCaesar/-Titanic-Survival-Prediction/assets/101235367/e6862fe7-130f-4e3f-859e-50899e95afb3)
+性別：大部的男性都罹難(僅剩約 19% 存活)，而女性則大部分都倖存(約 74%)。
+### 程式碼：
+```python
+sns.countplot(df_data['Pclass'], hue=df_data['Survived'])
+df_data[["Pclass", "Survived"]].groupby(['Pclass'], as_index=False).mean().round(2)
+```
+### 執行結果：
+![image](https://github.com/LonelyCaesar/-Titanic-Survival-Prediction/assets/101235367/31062481-01f6-43c3-b051-d35a3ccccb0c)
+艙等：從數據中可發現頭等艙(Pclass=1)的乘客生存機率較高， 可能不論是逃生設備或是沈船訊息都最先傳到頭等艙。
+### 程式碼：
+```python
+sns.countplot(df_data['Embarked'], hue=df_data['Survived'])
+df_data[["Embarked", "Survived"]].groupby(['Embarked'], as_index=False).mean().round(2)
+```
+### 執行結果：
+![image](https://github.com/LonelyCaesar/-Titanic-Survival-Prediction/assets/101235367/78e0b53b-8b21-4907-a3c5-4b5a9a4a746e)
+登船港口：依據數據顯示出來的結果為生存率以C最高。
+### 程式碼：
+```python
+sns.countplot(df_data['SibSp'], hue=df_data['Survived'])
+df_data[["SibSp", "Survived"]].groupby(['SibSp'], as_index=False).mean().round(2)
+```
+### 執行結果：
+![image](https://github.com/LonelyCaesar/-Titanic-Survival-Prediction/assets/101235367/604f67bd-d9ee-45ee-94aa-c75c17609f3b)
+當船上的兄弟姐妹配偶人數有1人同行時，則生存率較高。
+### 程式碼：
+```python
+sns.countplot(df_data['Parch'], hue=df_data['Survived'])
+df_data[["Parch", "Survived"]].groupby(['Parch'], as_index=False).mean().round(2)
+```
+### 執行結果：
+![image](https://github.com/LonelyCaesar/-Titanic-Survival-Prediction/assets/101235367/b286a635-eb01-40a7-bbf0-27e98aab9779)
+當船上的父母子女人數為 1~3 人時，有較高的生存率。
+### 程式碼：
+```python
+# 轉換性別資料：0->女性，1->男性
+df_data['Sex_Code'] = df_data['Sex'].map({'female':1, 'male':0})
+df_data.head(2)
+```
+### 執行結果：
+![image](https://github.com/LonelyCaesar/-Titanic-Survival-Prediction/assets/101235367/ca8d785b-8238-4ec5-b4ae-9c6692507b06)
+
+
+
+
